@@ -1,13 +1,11 @@
 import { Link, Outlet } from "react-router-dom";
+import "./Layout.css";
 
 const Layout: React.FC = () => {
   return (
     <div>
       <nav>
-        <ul>
-          <li>
-            <Link to="/">Public</Link>
-          </li>
+        <ul className="navigation-bar">
           <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
@@ -16,6 +14,9 @@ const Layout: React.FC = () => {
           </li>
           <li>
             <Link to="/register">Register</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
           </li>
         </ul>
       </nav>

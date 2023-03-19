@@ -2,9 +2,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
 import Layout from "../Layout/Layout";
 import Preferences from "../Preferences/Preferences";
-import Public from "../Public/Public";
 import Register from "../Register/Register";
-import "./App.less";
+import Login from "../Login/Login";
+import "./App.css";
 
 const App = () => {
   return (
@@ -14,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout></Layout>}>
             <Route path="/register" element={<Register></Register>}></Route>
+            <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
             <Route
               path="/preferences"

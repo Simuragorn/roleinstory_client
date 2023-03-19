@@ -1,0 +1,8 @@
+.navigation-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation-bar li{
+  padding: 0px 25px 0px 0px;
+}

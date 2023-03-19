@@ -5,8 +5,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
-import "./Register.css";
+//import "./Register.css";
 import axios from "../../api/axios";
+import { Link } from "react-router-dom";
 
 const USERNAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
@@ -35,7 +36,7 @@ const Register: React.FC = () => {
   const [validMatchPassword, setValidMatchPassword] = useState(false);
   const [matchPasswordFocus, setMatchPasswordFocus] = useState(false);
 
-  const [errMsg, setErrMsg] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
@@ -57,8 +58,15 @@ const Register: React.FC = () => {
   }, [password, matchPassword]);
 
   useEffect(() => {
-    setErrMsg("");
+    setErrorMessage("");
   }, [username, email, password, matchPassword]);
+
+  const clearInputs = () => {
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setMatchPassword("");
+  };
 
   const tryRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -69,7 +77,7 @@ const Register: React.FC = () => {
       !validPassword ||
       !validMatchPassword
     ) {
-      setErrMsg("Invalid Entry");
+      setErrorMessage("Invalid Entry");
       return;
     }
     try {
@@ -87,13 +95,10 @@ const Register: React.FC = () => {
       );
       console.log(response.data);
       setSuccess(true);
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setMatchPassword("");
+      clearInputs();
     } catch (err) {
       console.log(JSON.stringify(err));
-      setErrMsg("Registration Failed");
+      setErrorMessage("Registration Failed");
       errRef?.current?.focus();
     }
   };
@@ -111,10 +116,10 @@ const Register: React.FC = () => {
         <section>
           <p
             ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
+            className={errorMessage ? "errmsg" : "offscreen"}
             aria-live="assertive"
           >
-            {errMsg}
+            {errorMessage}
           </p>
           <h1>Register</h1>
           <form onSubmit={tryRegister}>
@@ -284,7 +289,7 @@ const Register: React.FC = () => {
             <br />
             <span className="line">
               {/*put router link here*/}
-              <a href="#">Sign In</a>
+              <Link to="/login">Sign In</Link>
             </span>
           </p>
         </section>
